@@ -1,0 +1,96 @@
+body {
+    background-image: url('/img/francesco-villa-2.jpg'); /* Ruta a tu imagen de fondo */
+    background-size: cover; /* Cubre toda el área del cuerpo */
+    background-position: center; /* Centra la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .form-container {
+    max-width: 800px; /* Formulario más ancho */
+    margin: 30px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+    padding: 30px;
+    border-left: 5px solid #5f96e1; /* Color2: Azul claro */
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+  }
+  
+  .heading {
+    display: block;
+    color: #091b78; /* Color3: Azul oscuro */
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+  
+  .form-container .form .input {
+    color: #4c3c74; /* Color4: Morado oscuro */
+    width: 100%;
+    background-color: #184480; /* Color5: Azul oscuro */
+    border: none;
+    outline: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    border-left: 1px solid transparent;
+  }
+  
+  .form-container .form .input:focus {
+    border-left: 5px solid #5f96e1; /* Color2: Azul claro */
+  }
+  
+  .form-container .form .textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: #184480; /* Color5: Azul oscuro */
+    color: #091b78; /* Color3: Azul oscuro */
+    font-weight: bold;
+    resize: none;
+    max-height: 150px;
+    margin-bottom: 20px;
+    border-left: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .form-container .form .textarea:focus {
+    border-left: 5px solid #5f96e1; /* Color2: Azul claro */
+  }
+  
+  .form-container .form .button-container .send-button {
+    flex-basis: 70%;
+    background: #5f96e1; /* Color2: Azul claro */
+    padding: 10px;
+    color: #234cb5; /* Color1: Azul */
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .form-container .form .button-container .send-button:hover {
+    background: transparent;
+    border: 1px solid #5f96e1; /* Color2: Azul claro */
+    color: #5f96e1; /* Color2: Azul claro */
+  }
+  
+  .form-container .form .button-container .reset-button-container .reset-button {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    color: #5f96e1; /* Color2: Azul claro */
+    font-weight: bold;
+    background: #234cb5; /* Color1: Azul */
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .form-container .form .button-container .reset-button-container .reset-button:hover {
+    background: #5f96e1; /* Color2: Azul claro */
+    color: #234cb5; /* Color1: Azul */
+  }
+  

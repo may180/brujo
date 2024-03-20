@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/servicios.css">
+  
+    <title>servicios</title>
+</head>
+<body>   
+
+    <div class="centrar">
+        <div id="servicios" class="content-section">
+            <% servicios.forEach(servicio => { %>
+                <div class="card">
+                    <div class="card__content">
+                        <p class="card__title"><%= servicio.nombre_servicio %></p>
+                        <p class="card__description"><%= servicio.descripcion %></p>
+                        <form action="/consulta_servicio" method="post">
+                            <input type="hidden" name="id_servicio" value="<%= servicio.id_servicio %>">
+                            <button type="submit">¡Consultar Ahora Gratis!</button>
+                        </form>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+   
+
+</body>
+</html>
+<!-- <style>
+    /* Estilos para la modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        text-align: center;
+    }
+</style> -->
+
+    <!-- Modal para mostrar el mensaje de éxito -->
+<!--     <div id="modal-exito" class="modal">
+        <div class="modal-content">
+            <h2>¡Consulta registrada con éxito!</h2>
+            <p>Tu consulta se ha registrado correctamente.</p>
+        </div>
+    </div> -->
+<!-- <script>
+
+    function mostrarModal() {
+        var modal = document.getElementById('modal-exito');
+        modal.style.display = 'block';
+        setTimeout(function() {
+            modal.style.display = 'none';
+        }, 3000); // Ocultar la modal después de 3 segundos
+    }
+
+    // Función para registrar la consulta y mostrar la modal
+    function registrarConsulta(idServicio) {
+        event.preventDefault();
+        var form = document.getElementById('form-' + idServicio);
+        var formData = new FormData(form);
+        fetch('/guardar', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al registrar la consulta de servicio');
+            }
+            mostrarModal();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un error al procesar tu solicitud');
+        });
+    }
+</script> -->

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="/style/login.css">
+</head>
+
+<body>
+    <div class="form-box">
+        <form class="form" action="/register" method="post">
+            <span class="title">registre usuario</span>
+            <div class="form-container">
+                <input type="text" class="input" name="nombre_usuario" placeholder="Nombre">
+                <input type="text" class="input" name="cc" placeholder="cc">
+                <div class="telephone">
+                    <select class="input" name="indicativo">
+                        <option value="57">+57 (Colombia)</option>
+                        <option value="1">+1 (EE. UU.)</option>
+                        <option value="44">+44 (Reino Unido)</option>
+                        <option value="49">+49 (Alemania)</option>
+                        <option value="33">+33 (Francia)</option>
+                        <option value="81">+81 (Japón)</option>
+                        <option value="86">+86 (China)</option>
+                        <option value="7">+7 (Rusia)</option>
+                        <option value="91">+91 (India)</option>
+                        <option value="55">+55 (Brasil)</option>
+                    </select>
+                    <input type="text" class="input" name="telefono" placeholder="telefono">
+                </div>
+
+                <input type="password" class="input" name="contraseña" placeholder="Contraseña">
+            </div>
+            <button type="submit">Inicia Sesión</button>
+
+            <% if (typeof mensaje !=='undefined' && mensaje) { %>
+                <div class="mensaje">
+                    <%= mensaje %>
+                </div>
+                <% } %>
+        </form>
+        <div class="form-section">
+        </div>
+    </div>
+</body>
+
+</html>

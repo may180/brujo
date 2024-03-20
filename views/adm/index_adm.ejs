@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../views/routes/style/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/public/style/amd.css">
+    <title>templo shaddai</title>
+    <style>
+        /* Agrega estilos personalizados aquí si es necesario */
+    </style>
+</head>
+<body>
+    <!-- MENU  -->
+    <nav>
+        <div id="portrait-frame">
+            <img id="portrait" src="/img/LOGO.png" alt="LOGO">
+            <h1 id="title" class="hf_text">AMARRESY HECHIZOS</h1>
+        </div>
+
+        <div id="nav-items">
+            <input type="checkbox" id="nav-check">
+            <div class="nav-icon">
+                <label for="nav-check">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a  href="" class="nav_link_text">consulta </a></li>
+                <li><a  href="#contactanos" class="nav_link_text">foro</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="slider-container">
+        <div class="slider-content">
+            <div class="slider-item"><img src="./img/Frame 1.png" alt="Imagen 1"></div>
+            <div class="slider-item"><img src="./img/Frame 2.png" alt="Imagen 2"></div>
+        </div>
+    </div>
+
+    <h1>Consultas de Servicios</h1>
+    <table id="table" class="header-tabla-contacto">
+      <thead class="buscador-contacto">
+        <tr>
+          <th>indicativo</th>
+          <th>telefono</th>
+          <th>cedula</th>
+          <th>Nombre Usuario</th>
+          <th>Nombre Servicio</th>
+          <th>Fecha de Consulta</th>
+          <th>Estado de la Consulta</th>
+          <th>Marcar como consultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% consultas.forEach(consulta => { %>
+          <tr>      
+
+            <td><%= consulta.indicativo%></td>
+            <td><%= consulta.telefono%></td>
+            <td><%= consulta.cc%></td>
+            <td><%= consulta.nombre_usuario %></td>
+            <td><%= consulta.nombre_servicio %></td>
+            <td><%= consulta.fecha_consulta %></td>
+            <td><%= consulta.estado_consulta %></td>
+            <td>
+              <% if (consulta.estado_consulta === 'No consultado') { %>
+                <form action="/consulted" method="post">
+                  <input type="hidden" value="<%= consulta.id_consulta %>" name="id">
+                  <input type="hidden" value="consultado" name="consulted">
+                  <button>Marcar como consultado</button>
+                </form>
+
+              <% } else { %> 
+                <form action="/consulted" method="post">
+                <input type="hidden" value="<%= consulta.id_consulta %>" name="id">
+                <input type="hidden" value="no_onsultado" name="consulted">
+                <button>Marcar como no consultado</button>
+              </form>
+              <% } %>
+            </td>
+            <td>
+              <form action="/reporte" method="post">
+                <input type="hidden" value="<%= consulta.nombre_usuario %>" name="nombre">
+                <input type="hidden" value="<%= consulta.nombre_servicio %>" name="servicio">
+                <input type="hidden" value="<%= consulta.telefono %>" name="telefono">
+                <input type="hidden" value="<%= consulta.indicativo %>" name="indicativo">
+                <button>generar reporte</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <script src="tabla.js"></script>
+
+    
+  
+        <div id="contactanos" class="">
+            <h2>Contactanos</h2>
+            <h2>hidalgoalejandro406@gmail.com</h2>
+            <h2>Telefono: 666-666-666</h2>
+        </div>
+    
+</body>
+</html>
+
+
