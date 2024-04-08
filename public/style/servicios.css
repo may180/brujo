@@ -1,133 +1,352 @@
-html, body {
-    height: 100%; /* Establece la altura del cuerpo y el html al 100% */
-    margin: 0; /* Elimina el margen predeterminado */
-    padding: 0; /* Elimina el relleno predeterminado */
+html,
+body {
+  height: 100%;
+  /* Establece la altura del cuerpo y el html al 100% */
+  margin: 0;
+  /* Elimina el margen predeterminado */
+  padding: 0;
+  /* Elimina el relleno predeterminado */
+}
+
+nav {
+  width: 100%;
+  min-width: 150px;
+  height: 100px;
+  background-color: #9CA6BB;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+#portrait-frame {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 40vw;
+  min-width: 200px;
+  max-width: 470px;
+  height: 100%;
+  justify-content: space-between;
+}
+
+#portrait {
+  width: 95px;
+  -webkit-clip-path: circle(40%);
+  clip-path: circle(40%);
+  padding: 0.4rem;
+  margin-left: min(3rem, 12vw);
+  margin-right: 0.5rem;
+}
+
+#title {
+  width: auto;
+  margin-right: 3rem;
+  letter-spacing: 4px;
+  font-size: 30px;
+}
+
+#nav-items {
+  width: 50%;
+  min-width: 50px;
+  height: 70px;
+  margin-right: 20px;
+}
+
+.nav-icon,
+#nav-check {
+  display: none;
+}
+
+#nav-items ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+#nav-items li {
+  list-style-type: none;
+  width: 20%;
+  height: 60%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav_link_text {
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  letter-spacing: 2px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#about {
+  padding: 0.6rem 0.8rem;
+}
+
+#connect {
+  padding: 0.6rem 0.75rem;
+  margin-left: -1.5px;
+}
+
+.content-wrap {
+  margin-top: 100px;
+}
+
+@media screen and (max-width: 750px) {
+
+  /* Estilos para pantallas de hasta 750px de ancho */
+  nav {
+    height: 80px;
+    min-width: 200px;
+  }
+
+  #title {
+    min-width: 80px;
+    font-size: 18px;
+  }
+
+  #nav-items {
+    overflow: hidden;
+    margin-left: 1px;
+  }
+
+  #nav-items>ul {
+    border: 1px solid #352020;
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+  }
+
+  #nav-items>ul>li {
+    margin: 0;
+    width: 100%;
+    min-width: 200px;
+    padding: 0;
+    height: 59px;
+    border: 1px solid #355845;
+    border-radius: 0;
+    background-color: #BFC9DA;
+  }
+
+  .nav_link_text {
+    overflow: hidden;
+    font-size: 18px;
+  }
+
+  #home,
+  #work,
+  #about,
+  #connect {
+    padding: 0.8rem;
+    margin: 0;
+  }
+
+  #portrait {
+    width: 80px;
+    -webkit-clip-path: circle(36%);
+    clip-path: circle(36%);
+    padding: 0.4rem;
+    margin-left: min(1.8rem, 12vw);
+    margin-right: 0.8rem;
+  }
+
+  .nav-icon {
+    display: inline-block;
+    line-height: 70px;
+  }
+
+  .nav-icon>label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+    vertical-align: middle;
+  }
+
+  .nav-icon>label>span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 3px solid #254773;
+  }
+
+  .nav-icon>label:hover {
+    cursor: pointer;
+  }
+
+  .nav-links {
+    position: absolute;
+    display: block;
+    width: 102%;
+    background-color: #4a3434;
+    transition: height 0.3s step-start;
+    overflow-y: hidden;
+    top: 80px;
+    left: -5px;
+  }
 }
 
 body {
-    background: url('../img/fon_se.jpg') no-repeat center center fixed;
+  background: url('../img/fon_se.jpg') no-repeat center center fixed;
 
-    background-size: cover; /* Cubre toda el área del cuerpo */
+  background-size: cover;
+  /* Cubre toda el área del cuerpo */
 }
 
+
 #servicios {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .card-row {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    margin-bottom: 20px; /* Add margin between rows */
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  /* Add margin between rows */
 }
 
 .card {
-    width: 300px; /* Ajusta el ancho de las tarjetas para acomodar 4 por fila */
-    height: 350px;
-    background-color: #792d2d52;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    perspective: 1000px;
-    box-shadow: 0 0 0 5px #ffffff80;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    margin-bottom: 20px; /* Ajusta el margen entre las tarjetas */
+  width: 300px;
+  height: 350px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  perspective: 1000px;
+  box-shadow: 0 0 0 5px #ffffff80;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-bottom: 20px;
+  /* Ajusta el margen entre las tarjetas */
 }
 
 .card svg {
-    width: 48px;
-    fill: #333;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 48px;
+  fill: #333;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
 }
 
 .card__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: rgba(240, 8, 8, 0.91); /* Modifica el color de fondo */
-    opacity: 0; /* Establece la opacidad inicial a 0 */
-    transition: opacity 0.6s ease; /* Agrega una transición para la opacidad */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: rgba(240, 8, 8, 0.91);
+  /* Modifica el color de fondo */
+  opacity: 0;
+  /* Establece la opacidad inicial a 0 */
+  transition: opacity 0.6s ease;
+  /* Agrega una transición para la opacidad */
 }
 
 .card:hover .card__content {
-    opacity: 1; /* Cambia la opacidad a 1 al pasar el mouse */
+  opacity: 1;
+  /* Cambia la opacidad a 1 al pasar el mouse */
 }
 
 .card__title {
-    text-align: center; /* Centra el texto */
-    font-family: 'Arial', sans-serif; /* Cambia la fuente a Arial o la que prefieras */
-    color: #333; /* Cambia el color del texto */
-    font-size: 24px; /* Ajusta el tamaño del texto */
-    font-weight: bold; /* Ajusta el peso de la fuente */
-    margin-bottom: 10px; /* Ajusta el margen inferior */
+  text-align: center;
+  /* Centra el texto */
+  font-family: 'Arial', sans-serif;
+  /* Cambia la fuente a Arial o la que prefieras */
+  color: #333;
+  /* Cambia el color del texto */
+  font-size: 24px;
+  /* Ajusta el tamaño del texto */
+  font-weight: bold;
+  /* Ajusta el peso de la fuente */
+  margin-bottom: 10px;
+  /* Ajusta el margen inferior */
 }
 
 .card__description {
-    text-align: center; /* Centra el texto */
-    font-family: 'Arial', sans-serif; /* Cambia la fuente a Arial o la que prefieras */
-    color: #555; /* Cambia el color del texto */
-    font-size: 18px; /* Ajusta el tamaño del texto */
-    line-height: 1.4; /* Ajusta el espaciado entre líneas */
-    margin-bottom: 15px; /* Ajusta el margen inferior */
+  text-align: center;
+  /* Centra el texto */
+  font-family: 'Arial', sans-serif;
+  /* Cambia la fuente a Arial o la que prefieras */
+  color: #555;
+  /* Cambia el color del texto */
+  font-size: 18px;
+  /* Ajusta el tamaño del texto */
+  line-height: 1.4;
+  /* Ajusta el espaciado entre líneas */
+  margin-bottom: 15px;
+  /* Ajusta el margen inferior */
 }
 
 .card__content button .inner {
-    display: block; /* Hace que el botón ocupe todo el ancho disponible */
-    width: 100%; /* Ajusta el ancho del botón al 100% del contenedor */
-    padding: 10px 0; /* Ajusta el relleno del botón */
-    background-color: #25D366; /* Cambia el color de fondo del botón a dorado */
-    font-size: 18px; /* Ajusta el tamaño del texto del botón */
-    color: #fff; /* Cambia el color del texto del botón */
-    cursor: pointer;
-    font-weight: 600;
-    border: none;
-    border-radius: 5px;
-    transition: box-shadow 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: block;
+  /* Hace que el botón ocupe todo el ancho disponible */
+  width: 100%;
+  /* Ajusta el ancho del botón al 100% del contenedor */
+  padding: 10px 0;
+  /* Ajusta el relleno del botón */
+  background-color: #25D366;
+  /* Cambia el color de fondo del botón a dorado */
+  font-size: 18px;
+  /* Ajusta el tamaño del texto del botón */
+  color: #fff;
+  /* Cambia el color del texto del botón */
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  transition: box-shadow 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .card__content button:focus,
 .card__content button:hover {
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .card__content button:active {
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
 }
 
 .card__content button .inner:active {
-    transform: translateY(1px) scale(0.98) translate3d(0, 0, 0);
+  transform: translateY(1px) scale(0.98) translate3d(0, 0, 0);
 }
 
 .centrar {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: column; 
+  margin-top: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
 }
 
 .superior {
-    width: 100%;
-    height: 50%;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  height: 50%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .inferior {
-    width: 100%;
-    height: 50%;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  height: 50%;
+  justify-content: space-between;
+  align-items: center;
 }

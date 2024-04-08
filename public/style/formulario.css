@@ -15,6 +15,7 @@ body {
     padding: 30px;
     border-left: 5px solid #5f96e1; /* Color2: Azul claro */
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+    
   }
   
   .heading {

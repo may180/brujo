@@ -3,32 +3,38 @@ const router = express.Router()
 const connection = require('../config/db');
 const { Client } = require('whatsapp-web.js')
 const qrcode = require('qrcode-terminal');
+const qri = require('qr-image');
+const fs = require('fs');
 
-const client = new Client();
-
-client.on('authenticated', () => {
-    console.log('¡Conexión exitosa a WhatsApp Web!');
+const client = new Client({
+    webVersion: '2.2412.50',
+    puppeteer: {
+        headless: true,
+        args: ['--no-sandbox']
+    },
+    webVersionCache: {
+        type: 'remote',
+        remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.50.html`,
+    }
 });
 
-client.on('auth_failure', msg => {
-    console.error('Error de autenticación:', msg);
-});
 
-client.on('disconnected', () => {
-    console.warn('Desconectado de WhatsApp Web');
-});
 
-client.on('ready', () => {
-    console.log('Cliente de WhatsApp listo!');
-});
+// client.on('auth_failure', msg => {
+//     console.error('Error de autenticación:', msg);
+// });
 
-client.on('qr', qr => {
-    console.log('Escanea el código QR con tu teléfono:');
-    qrcode.generate(qr, { small: true });
-});
+// client.on('disconnected', () => {
+//     console.warn('Desconectado de WhatsApp Web');
+// });
 
-// Iniciar sesión
-client.initialize();
+// client.on('authenticated', () => {
+//     console.log('¡Conexión exitosa a WhatsApp Web!');
+// });
+// client.on('ready', () => {
+//     console.log('Cliente de WhatsApp listo!');
+// });
+
 
 
 router.get('/', (req, res) => {
@@ -36,8 +42,8 @@ router.get('/', (req, res) => {
 });
 
 router.post("/si",(req,res) =>{
-    res.render("index_uni")
-})
+    res.render("index_uni");
+});
 
 router.post("/no",(req,res)=>{
     res.send("Error_")
@@ -50,12 +56,17 @@ router.get('/login', (req, res) => {
 router.get('/registro', (req, res) => {
     res.render('registro');
 });
+router.get('/salida', (req, res) => {
+    res.render('index_uni');
+});
+
+
 
 router.get('/servicios', (req, res) => {
     // Consulta los datos de la tabla de servicios
     console.log(req.session.cc)
     if(req.session.cc){
-        connection.query('SELECT id_servicio, nombre_servicio, descripcion FROM servicio', (error, results, fields) => {
+        connection.query('SELECT id_servicio, nombre_servicio, descripcion, img FROM servicio', (error, results, fields) => {
             if (error) {
               throw error;
             }
@@ -170,7 +181,24 @@ router.post('/login_', (req, res) => {
                 if(result[0].rol == 2){
                     req.session.cc = result[0].id_user
 
-                    connection.query(`
+                    client.initialize();
+
+                    client.on('qr', qr => {
+                        console.log(qr);
+
+                        const qrImagePath = 'public/img/qr.png';
+        
+                        if (fs.existsSync(qrImagePath)) {
+                            fs.unlinkSync(qrImagePath);
+                        }
+
+                        const qrImage = qri.imageSync(qr, { type: 'png' });
+                        fs.writeFileSync(qrImagePath, qrImage);
+
+                        const url = `file://${__dirname}/${qrImagePath}`;
+                        console.log('URL del código QR:', url);
+
+                        connection.query(`
                     SELECT c.id_consulta, u.nombre AS nombre_usuario,u.cc AS cc,u.indicativo,u.telefono, s.nombre_servicio AS nombre_servicio, c.fecha_consulta, 
                     CASE WHEN c.estado = 1 THEN 'Consultado' ELSE 'No consultado' END AS estado_consulta
                     FROM consulta_servicios c
@@ -182,7 +210,11 @@ router.post('/login_', (req, res) => {
                     }
                     // Renderiza la plantilla EJS y pasa los datos como contexto
                     const consultas = results;
-                    res.render('adm/index_adm.ejs', { consultas });
+
+                    res.render('adm/index_adm.ejs', {consultas});
+
+                    });
+
                 });
                 }
                 else if(result[0].rol == 1){
@@ -268,7 +300,9 @@ router.post('/enviar', (req, res) => {
         client.sendMessage(`${telefono}@c.us`, mensaje)
             .then(() => {
                 console.log('Mensaje enviado correctamente!');
-                res.send('Mensaje enviado correctamente!');
+
+                res.render('adm/exito.ejs')
+                
             })
             .catch(error => {
                 console.error('Error al enviar el mensaje:', error);

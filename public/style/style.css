@@ -26,8 +26,8 @@ body {
 }
 
 .slider-item {
-  width: 1909px;
-  height: 459px;
+  width: 100%; /* Cambiado para ser 100% del contenedor */
+  max-width: 100%; /* Añadido */
 }
 
 nav {
@@ -100,12 +100,6 @@ nav {
   justify-content: center;
   align-items: center;
 }
-#nav-items li:hover {
-  color: #000000;
-  background-color: #ffffff;
-  transition: 0.5s;
-  border: 1px solid black;
-}
 
 .nav_link_text {
   text-decoration: none;
@@ -129,6 +123,7 @@ nav {
 }
 
 @media screen and (max-width: 750px) {
+  /* Estilos para pantallas de hasta 750px de ancho */
   nav {
     height: 80px;
     min-width: 200px;
@@ -149,19 +144,13 @@ nav {
   }
   #nav-items > ul > li {
     margin: 0;
-    width: 100.5vw;
+    width: 100%;
     min-width: 200px;
     padding: 0;
     height: 59px;
     border: 1px solid #355845;
     border-radius: 0;
     background-color: #BFC9DA;
-  }
-  #nav-items > ul > li:nth-of-type(3) {
-    width: 100.5vw;
-  }
-  #nav-items > ul > li:nth-of-type(4) {
-    width: 100.5vw;
   }
   .nav_link_text {
     overflow: hidden;
@@ -173,14 +162,6 @@ nav {
   #connect {
     padding: 0.8rem;
     margin: 0;
-  }
-  #nav-items > ul > li:hover {
-    border: 6px outset #16E0B1;
-    border-radius: 2px;
-    cursor: pointer;
-  }
-  #nav-items > ul > li:hover .nav_link_text {
-    line-height: 0.9;
   }
   #portrait {
     width: 80px;
@@ -232,7 +213,7 @@ nav {
 }
 
 .slider img {
-  width: 100%; /* Ajustar el tamaño de las imágenes al contenedor */
+  width: 100%;
   height: auto;
 }
 
@@ -249,7 +230,8 @@ nav {
   font-size: 16px;
 }
 
-.prev-btn {
+.prev-btn,
+.next-btn {
   left: 0;
 }
 
@@ -284,12 +266,12 @@ nav {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  margin-bottom: 50px; /* Add margin between rows */
+  margin-bottom: 50px;
   margin-top: 50px;
 }
 
 .card {
-  width: 300px; /* Ajusta el ancho de las tarjetas para acomodar 4 por fila */
+  width: 300px;
   height: 350px;
   background-color: rgba(121, 45, 45, 0.3215686275);
   border-radius: 10px;
@@ -300,7 +282,7 @@ nav {
   perspective: 1000px;
   box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.5019607843);
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  margin-bottom: 20px; /* Ajusta el margen entre las tarjetas */
+  margin-bottom: 20px;
 }
 
 .card svg {
@@ -322,40 +304,40 @@ nav {
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
-  background-color: rgba(240, 8, 8, 0.91); /* Modifica el color de fondo */
-  opacity: 0; /* Establece la opacidad inicial a 0 */
-  transition: opacity 0.6s ease; /* Agrega una transición para la opacidad */
+  background-color: rgba(240, 8, 8, 0.91);
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
 .card:hover .card__content {
-  opacity: 1; /* Cambia la opacidad a 1 al pasar el mouse */
+  opacity: 1;
 }
 
 .card__title {
-  text-align: center; /* Centra el texto */
-  font-family: "Arial", sans-serif; /* Cambia la fuente a Arial o la que prefieras */
-  color: #333; /* Cambia el color del texto */
-  font-size: 24px; /* Ajusta el tamaño del texto */
-  font-weight: bold; /* Ajusta el peso de la fuente */
-  margin-bottom: 10px; /* Ajusta el margen inferior */
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .card__description {
-  text-align: center; /* Centra el texto */
-  font-family: "Arial", sans-serif; /* Cambia la fuente a Arial o la que prefieras */
-  color: #555; /* Cambia el color del texto */
-  font-size: 18px; /* Ajusta el tamaño del texto */
-  line-height: 1.4; /* Ajusta el espaciado entre líneas */
-  margin-bottom: 15px; /* Ajusta el margen inferior */
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  color: #555;
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 15px;
 }
 
 .card__content button .inner {
-  display: block; /* Hace que el botón ocupe todo el ancho disponible */
-  width: 100%; /* Ajusta el ancho del botón al 100% del contenedor */
-  padding: 10px 0; /* Ajusta el relleno del botón */
-  background-color: #25D366; /* Cambia el color de fondo del botón a dorado */
-  font-size: 18px; /* Ajusta el tamaño del texto del botón */
-  color: #fff; /* Cambia el color del texto del botón */
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #25D366;
+  font-size: 18px;
+  color: #fff;
   cursor: pointer;
   font-weight: 600;
   border: none;
@@ -397,25 +379,10 @@ nav {
   align-items: center;
 }
 
-.superior {
-  width: 100%;
-  height: 50%;
-  justify-content: space-between;
-  align-items: center;
-  background: url("../img/fon_se.jpg");
-}
-
-.inferior {
-  width: 100%;
-  height: 50%;
-  justify-content: space-between;
-  align-items: center;
-}
-
 #contactanos {
-  width: 100%; /* Ocupa todo el ancho */
+  width: 100%;
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
+  justify-content: center;
 }
 
 .social-card {
@@ -595,10 +562,9 @@ section {
     transform: scale(0.95, 1.05);
   }
 }
-/* SWIPER */
 .swiper-container {
-  width: 250px;
-  height: 450px;
+  width: 100%;
+  height: 100%;
   padding: 50px 0;
 }
 
@@ -776,7 +742,8 @@ section {
   display: table-header-group;
 }
 
-.dataTables_filter, .dataTables_info {
+.dataTables_filter,
+.dataTables_info {
   display: none;
 }
 
@@ -784,39 +751,9 @@ section {
   margin-bottom: 20rem;
 }
 
-#table thead.buscador-contacto tr th:nth-child(2) {
-  text-align: right;
-  vertical-align: middle;
-  color: #3e8ed5;
-}
-
-#table .dt-filter-text input {
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  border-bottom: solid 1px #ccc;
-}
-
-#table .dt-filter-select select {
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
-  border-bottom: solid 1px #ccc;
-}
-
-#table tbody {
-  padding: 0 20px;
-  background: #fff;
-  box-shadow: 5px 5px 15px -2px rgba(0, 0, 0, 0.3);
-}
-
-#table tr.header-tabla-contacto {
-  vertical-align: middle !important;
-  border: 0px solid #ddd;
-}
-
-#table tr.header-tabla-contacto th {
-  text-align: center;
+#table thead.buscador-contacto tr th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #a5d8dd;
 }/*# sourceMappingURL=style.css.map */

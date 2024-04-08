@@ -3,7 +3,7 @@ const dbConfig = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'maikol'
+    database: 'maikol2'
   };
   
   
