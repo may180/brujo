@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="/style/formul.css">
     <link rel="stylesheet" href="/style/amd.css">
     <title>templo shaddai</title>
-    <style>
-        /* Agrega estilos personalizados aquí si es necesario */
-    </style>
+    <link rel="icon" href="./img/LOGO.png" type="image/x-icon">
+ 
 </head>
 <body>
     <!-- MENU  -->
@@ -44,7 +43,7 @@
     </div>
 
 
-    <img src="img/qr.png" alt="">
+    <img id="qr-code" src="img/qr.png" alt="">
 
   
     <h1>Consultas de Servicios</h1>
@@ -84,7 +83,7 @@
                 <form action="/consulted" method="post">
                 <input type="hidden" value="<%= consulta.id_consulta %>" name="id">
                 <input type="hidden" value="no_onsultado" name="consulted">
-                <button>Marcar como no consultado</button>
+                <button  >Marcar como no consultado</button>
               </form>
               <% } %>
             </td>

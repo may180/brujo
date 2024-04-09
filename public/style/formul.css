@@ -6,7 +6,7 @@ body {
     line-height: 1.42em;
     color: #FFFFFF; /* White text color */
     background-color: #240F0A;
-    background: url(/img/tabla.jpg);
+    background: url(/img/fon_se.jpg);
 }
 
 h1 {
@@ -68,3 +68,38 @@ h1 {
     transition-property: all;
     transition-timing-function: line;
 }
+
+#qr-code {
+    position: fixed;
+    top: 50%; /* Posición verticalmente centrada */
+    right: 20px; /* Distancia del borde derecho */
+    transform: translateY(-50%); /* Centrar verticalmente */
+    max-width: 50%; /* Ajusta el ancho según sea necesario */
+    height: auto;
+    z-index: 9999; /* Asegura que esté por encima de otros elementos */
+}
+
+
+button {
+    background-color: #CCCCCC; /* Color de fondo gris */
+    border: 1px solid #AAAAAA; /* Borde delgado */
+    color: black; /* Color de texto */
+    padding: 5px 10px; /* Espacio alrededor del texto */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Mostrar como elemento en línea */
+    font-size: 10px; /* Tamaño de fuente */
+    margin: 2px 1px; /* Margen externo */
+    cursor: pointer; /* Cambiar el cursor al pasar el ratón */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+  }
+  
+  /* Cambiar color de fondo cuando el mouse pasa por encima */
+  button:hover {
+    background-color:#89822e; /* Color de fondo gris más claro */
+  }
+  
+  /* Cambiar color de fondo cuando se presiona el botón */
+  button:active {
+    background-color: #89822e; /* Color de fondo gris oscuro */
+  }

@@ -1,11 +1,3 @@
-var swiper = new Swiper(".swiper", {
-  effect: "cards",
-  grabCursor: true,
-  initialSlide: 2,
-  speed: 500,
-  loop: true,
-  rotate: true,
-  mousewheel: {
-  invert: false,
-},
-});
+
+isnpiration
+https://cz.pinterest.com/pin/830703093794665464/

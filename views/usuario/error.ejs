@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error</title>
+    <link rel="icon" href="./img/LOGO.png" type="image/x-icon">
+    <audio id="miAudio">
+        <source src="/img/musica.mp3" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+      </audio>
+      <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+          var audio = document.getElementById('miAudio');
+          audio.play();
+        });
+      </script>
 </head>
 <body>
     <h1>Error</h1>

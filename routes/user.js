@@ -45,9 +45,9 @@ router.post("/si",(req,res) =>{
     res.render("index_uni");
 });
 
-router.post("/no",(req,res)=>{
-    res.send("Error_")
-})
+router.post("/no", (req, res) => {
+    res.redirect('https://www.google.com');
+});
 
 router.get('/login', (req, res) => {
     res.render('login');

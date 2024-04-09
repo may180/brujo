@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
     <link rel="stylesheet" href="/style/login.css">
+    <audio id="miAudio">
+        <source src="/img/musica.mp3" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+      </audio>
+      <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+          var audio = document.getElementById('miAudio');
+          audio.play();
+        });
+      </script>
+          <link rel="icon" href="./img/LOGO.png" type="image/x-icon">
 </head>
 
 <body>
@@ -26,6 +37,28 @@
                 </div>
                 <% } %>
         </form>
+          <div>
+            <form class="form" action="/salida" method="post"></form>
+            <button class="form_button" onclick="window.location.href='/salida'">Salir</button>
+            <style>
+            .form_button {
+              background-color: #0066ff;
+              color: #fff;
+              border: 0;
+              
+              border-radius: 24px;
+              padding: 10px 16px;
+              font-size: 1rem;
+              font-weight: 600;
+              cursor: pointer;
+              transition: background-color .3s ease;
+            }
+            
+            .form_button:hover {
+              background-color: #005ce6;
+            }
+            </style>
+        </div>
         <div class="form-section">
         </div>
     </div>

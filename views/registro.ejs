@@ -6,12 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
     <link rel="stylesheet" href="/style/login.css">
+    <audio id="miAudio">
+        <source src="/img/musica.mp3" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+      </audio>
+      <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+          var audio = document.getElementById('miAudio');
+          audio.play();
+        });
+      </script>
+    <link rel="icon" href="./img/LOGO.png" type="image/x-icon">
 </head>
 
 <body>
     <div class="form-box">
         <form class="form" action="/register" method="post">
-            <span class="title">registre usuario</span>
+            <span class="title">Registre usuario</span>
             <div class="form-container">
                 <input type="text" class="input" name="nombre_usuario" placeholder="Nombre">
                 <input type="text" class="input" name="cc" placeholder="cc">
@@ -28,12 +39,37 @@
                         <option value="91">+91 (India)</option>
                         <option value="55">+55 (Brasil)</option>
                     </select>
-                    <input type="text" class="input" name="telefono" placeholder="telefono">
+                    <input type="text" class="input" name="telefono" placeholder="Telefono">
                 </div>
-
                 <input type="password" class="input" name="contraseña" placeholder="Contraseña">
             </div>
-            <button type="submit">Inicia Sesión</button>
+            <button type="submit">Iniciar Sesión</button>
+            
+        </form>
+        <div>
+            <form class="form" action="/salida" method="post"></form>
+            <button class="form_button" onclick="window.location.href='/salida'">Salir</button>
+            <style>
+            .form_button {
+              background-color: #0066ff;
+              color: #fff;
+              border: 0;
+              
+              border-radius: 24px;
+              padding: 10px 16px;
+              font-size: 1rem;
+              font-weight: 600;
+              cursor: pointer;
+              transition: background-color .3s ease;
+            }
+            
+            .form_button:hover {
+              background-color: #005ce6;
+            }
+            </style>
+        </div>
+    </div>
+ 
 
             <% if (typeof mensaje !=='undefined' && mensaje) { %>
                 <div class="mensaje">
@@ -44,6 +80,7 @@
         <div class="form-section">
         </div>
     </div>
+   
 </body>
 
 </html>
