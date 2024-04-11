@@ -3,6 +3,9 @@ const sliderItems = document.querySelectorAll('.slider-item');
 const sliderWidth = sliderItems[0].offsetWidth;
 let currentIndex = 0;
 
+// Add this line to make the images take up 100% of the page width
+sliderItems.forEach(item => item.style.width = '100%');
+
 function nextSlide() {
     if (currentIndex < sliderItems.length - 1) {
         currentIndex++;

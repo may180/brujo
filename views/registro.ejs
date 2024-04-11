@@ -44,6 +44,11 @@
                 <input type="password" class="input" name="contraseña" placeholder="Contraseña">
             </div>
             <button type="submit">Iniciar Sesión</button>
+            <% if (typeof mensaje !=='undefined' && mensaje) { %>
+                <div class="mensaje">
+                    <%= mensaje %>
+                </div>
+                <% } %>
             
         </form>
         <div>

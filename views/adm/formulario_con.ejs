@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/style/formulario.css">
     <h1 class="form-container">
         <div class="form">
+            <%= success %>
             <span class="heading">Formulario</span>
             <form action="/enviar" method="post">
                 <label for="nombre">Nombre:</label><br>
@@ -25,10 +26,14 @@
                 <textarea id="descripcion" name="descripcion" rows="4" cols="50" class="textarea"></textarea><br>
                 <div class="button-container">
                     <input type="submit" value="Enviar" class="send-button">
-                  
                 </div>
             </form>
-        </div>
+            <form action="/volver" method="post">
+                <div class="button-container">
+                    <input type="submit" value="volver" class="send-button">
+                </div>
+            </form>
+            
     </h1>
     
     

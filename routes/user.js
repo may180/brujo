@@ -124,7 +124,7 @@ router.post('/consulta_servicio', (req, res) => {
 
 
 
-router.post('/register', (req, res) => {
+/* router.post('/register', (req, res) => {
     // Recupera los datos del formulario
     const nombre_usuario = req.body.nombre_usuario;
     const cc = req.body.cc;
@@ -135,8 +135,17 @@ router.post('/register', (req, res) => {
     if (!nombre_usuario || !cc || !contraseña || !telefono) {
         return res.render('login', { mensaje: "Todos los campos son obligatorios" });
     }
-    if (contraseña.length < 8 || !/[!@#$%^&*]/.test(contraseña) || !/\d/.test(contraseña) || !/[A-Z]/.test(contraseña) || /\s/.test(contraseña)) {
+    if (contraseña.length < 8 || !/[!@#$%^&*-_+=|/?]/.test(contraseña) || !/\d/.test(contraseña) || !/[A-Z]/.test(contraseña) || /\s/.test(contraseña)) {
         return res.render('login', { mensaje: "La contraseña no cumple con los requisitos" });
+    }
+    // Validación del Formato del Número de Teléfono
+    const telefonoRegex = /^\d{10}$/; // Ejemplo de regex para un número de teléfono de 10 dígitos
+    if (!telefono.match(telefonoRegex)) {
+        return res.render('login', { mensaje: "El número de teléfono no cumple con el formato requerido" });
+    }
+    const ccRegex = /^[0-9]{7,10}$/; // Ejemplo de regex para un número de identificación de 7 a 10 dígitos
+    if (!cc.match(ccRegex)) {
+        return res.render('login', { mensaje: "El número de identificación no cumple con el formato requerido" });
     }
     
     const sql = "INSERT INTO user (nombre, cc, contraseña,telefono,rol,indicativo) VALUES (?, ?, ?,?,1,?)";
@@ -149,7 +158,65 @@ router.post('/register', (req, res) => {
             res.render('index_uni.ejs')
         }
     });
+}); */
+
+router.post('/register', (req, res) => {
+    // Recupera los datos del formulario
+    const nombre_usuario = req.body.nombre_usuario;
+    const cc = req.body.cc;
+    const contraseña = req.body.contraseña;
+    const telefono = req.body.telefono;
+    const indicativo = req.body.indicativo;
+
+    // Validación del Formato del Número de Identificación (CC)
+    const ccRegex = /^[0-9]{7,10}$/; // Ejemplo de regex para un número de identificación de 7 a 10 dígitos
+    if (!cc.match(ccRegex)) {
+        return res.render('registro', { mensaje: "El número de identificación no cumple con el formato requerido" });
+    }
+
+    // Validación del Formato del Número de Teléfono
+    const telefonoRegex = /^\d{10}$/; // Ejemplo de regex para un número de teléfono de 10 dígitos
+    if (!telefono.match(telefonoRegex)) {
+        return res.render('registro', { mensaje: "El número de teléfono no cumple con el formato requerido" });
+    }
+
+    // Verificar si la CC ya está en uso
+    const ccQuery = "SELECT * FROM user WHERE cc = ?";
+    connection.query(ccQuery, [cc], (ccErr, ccResult) => {
+        if (ccErr) {
+            console.error('Error al verificar la CC:', ccErr);
+            return res.render('registro.ejs', { mensaje: "Error al verificar la CC" });
+        }
+        if (ccResult.length > 0) {
+            return res.render('registro', { mensaje: "El número de identificación ya está en uso" });
+        }
+
+        // Verificar si el teléfono ya está en uso
+        const telefonoQuery = "SELECT * FROM user WHERE telefono = ?";
+        connection.query(telefonoQuery, [telefono], (telefonoErr, telefonoResult) => {
+            if (telefonoErr) {
+                console.error('Error al verificar el teléfono:', telefonoErr);
+                return res.render('registro.ejs', { mensaje: "Error al verificar el teléfono" });
+            }
+            if (telefonoResult.length > 0) {
+                return res.render('registro', { mensaje: "El número de teléfono ya está en uso" });
+            }
+
+            // Si la CC y el teléfono no están en uso, proceder con la inserción en la base de datos
+            const sql = "INSERT INTO user (nombre, cc, contraseña, telefono, rol, indicativo) VALUES (?, ?, ?, ?, 1, ?)";
+            connection.query(sql, [nombre_usuario, cc, contraseña, telefono, indicativo], (insertErr, insertResult) => {
+                if (insertErr) {
+                    console.error('Error al insertar los datos:', insertErr);
+                    res.render('registro.ejs', { mensaje: "Error al insertar los datos" });
+                } else {    
+                    console.log('Datos insertados correctamente');
+                    res.render('index_uni.ejs');
+                }
+            });
+        });
+    });
 });
+
 
 router.post('/login_', (req, res) => {
 
@@ -162,8 +229,7 @@ router.post('/login_', (req, res) => {
         return res.render('login', { mensaje: "Todos los campos son obligatorios" });
     }
 
-  
-    if (contraseña.length < 8 || !/[!@#$%^&*]/.test(contraseña) || !/\d/.test(contraseña) || !/[A-Z]/.test(contraseña) || /\s/.test(contraseña)) {
+    if (contraseña.length < 8 || !/[!@#$%^&*-_+=|/?]/.test(contraseña) || !/\d/.test(contraseña) || !/[A-Z]/.test(contraseña) || /\s/.test(contraseña)) {
         return res.render('login', { mensaje: "La contraseña no cumple con los requisitos" });
     }
 
@@ -280,10 +346,29 @@ router.post('/reporte',(req,res)=>{
     const indicativo = req.body.indicativo
     const datos = {nombre,servicio,telefono,indicativo}
 
-    res.render('adm/formulario_con.ejs',{datos})
+    const success = null
+    res.render('adm/formulario_con.ejs',{datos,success})
 
 })
 
+router.post('/volver',(req,res)=>{
+    connection.query(`
+                    SELECT c.id_consulta, u.nombre AS nombre_usuario,u.cc AS cc,u.indicativo,u.telefono, s.nombre_servicio AS nombre_servicio, c.fecha_consulta, 
+                    CASE WHEN c.estado = 1 THEN 'Consultado' ELSE 'No consultado' END AS estado_consulta
+                    FROM consulta_servicios c
+                    JOIN user u ON c.id_user = u.id_user
+                    JOIN servicio s ON c.id_servicio = s.id_servicio;
+                `, (error, results, fields) => {
+                    if (error) {
+                        throw error;
+                    }
+                    // Renderiza la plantilla EJS y pasa los datos como contexto
+                    const consultas = results;
+
+                    res.render('adm/index_adm.ejs', {consultas});
+
+                    });
+})
 
 router.post('/enviar', (req, res) => {
     const nombre = req.body.nombre;
@@ -301,7 +386,9 @@ router.post('/enviar', (req, res) => {
             .then(() => {
                 console.log('Mensaje enviado correctamente!');
 
-                res.render('adm/exito.ejs')
+                const datos = {nombre,servicio,telefonoNum,indicativo}
+                const success = "mensaje enviado exitosamente"
+                res.render('adm/formulario_con.ejs',{datos,success})
                 
             })
             .catch(error => {

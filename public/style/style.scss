@@ -18,9 +18,9 @@ body {
 }
 
 .slider-container {
+  
+  height: 600px;
   width: 100%;
-  overflow: hidden;
-  position: relative;
   margin: 0 auto;
 }
 
@@ -31,7 +31,11 @@ body {
 
 .slider-item {
   width: 100%; /* Cambiado para ser 100% del contenedor */
-  max-width: 100%; /* Añadido */
+}
+
+.slider-item img{
+  height: 600px;
+  width: 100vw !important;
 }
 
 nav {
@@ -42,7 +46,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
   top: 0;
   left: 0;
   z-index: 2;
@@ -513,8 +516,7 @@ $position: -0.375rem;
   padding: 0;
   box-sizing: border-box;
 }
-img {
-  max-width: 100%;
+img { 
   display: block;
 }
 
@@ -610,6 +612,9 @@ section {
         font-size: clamp(0.85rem, 0.75rem + 0.32vw, 1.15rem);
         letter-spacing: 0.12rem;
         font-weight: 300;
+        max-width: 100%;
+      }
+      img{
         max-width: 100%;
       }
 
